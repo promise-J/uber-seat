@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./apps/auth-service/src/app.controller.ts":
-/*!*************************************************!*\
-  !*** ./apps/auth-service/src/app.controller.ts ***!
-  \*************************************************/
+/***/ "./apps/auth-service/src/auth/app.controller.ts":
+/*!******************************************************!*\
+  !*** ./apps/auth-service/src/auth/app.controller.ts ***!
+  \******************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -22,7 +22,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/auth-service/src/app.service.ts");
+const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/auth-service/src/auth/app.service.ts");
 let AppController = class AppController {
     appService;
     constructor(appService) {
@@ -47,10 +47,10 @@ exports.AppController = AppController = __decorate([
 
 /***/ }),
 
-/***/ "./apps/auth-service/src/app.module.ts":
-/*!*********************************************!*\
-  !*** ./apps/auth-service/src/app.module.ts ***!
-  \*********************************************/
+/***/ "./apps/auth-service/src/auth/app.module.ts":
+/*!**************************************************!*\
+  !*** ./apps/auth-service/src/auth/app.module.ts ***!
+  \**************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -63,8 +63,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const app_controller_1 = __webpack_require__(/*! ./app.controller */ "./apps/auth-service/src/app.controller.ts");
-const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/auth-service/src/app.service.ts");
+const app_controller_1 = __webpack_require__(/*! ./app.controller */ "./apps/auth-service/src/auth/app.controller.ts");
+const app_service_1 = __webpack_require__(/*! ./app.service */ "./apps/auth-service/src/auth/app.service.ts");
 const config_1 = __webpack_require__(/*! @app/config */ "./libs/config/src/index.ts");
 let AppModule = class AppModule {
 };
@@ -80,10 +80,10 @@ exports.AppModule = AppModule = __decorate([
 
 /***/ }),
 
-/***/ "./apps/auth-service/src/app.service.ts":
-/*!**********************************************!*\
-  !*** ./apps/auth-service/src/app.service.ts ***!
-  \**********************************************/
+/***/ "./apps/auth-service/src/auth/app.service.ts":
+/*!***************************************************!*\
+  !*** ./apps/auth-service/src/auth/app.service.ts ***!
+  \***************************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -352,7 +352,7 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
-const app_module_1 = __webpack_require__(/*! ./app.module */ "./apps/auth-service/src/app.module.ts");
+const app_module_1 = __webpack_require__(/*! ./auth/app.module */ "./apps/auth-service/src/auth/app.module.ts");
 const http_exception_filter_1 = __webpack_require__(/*! libs/common/filter/http-exception.filter */ "./libs/common/filter/http-exception.filter.ts");
 const logging_interceptor_1 = __webpack_require__(/*! libs/common/interceptors/logging.interceptor */ "./libs/common/interceptors/logging.interceptor.ts");
 async function bootstrap() {
