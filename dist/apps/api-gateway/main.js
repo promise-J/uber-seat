@@ -66,12 +66,13 @@ const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const api_gateway_controller_1 = __webpack_require__(/*! ./api-gateway.controller */ "./apps/api-gateway/src/api-gateway.controller.ts");
 const api_gateway_service_1 = __webpack_require__(/*! ./api-gateway.service */ "./apps/api-gateway/src/api-gateway.service.ts");
 const config_1 = __webpack_require__(/*! @app/config */ "./libs/config/src/index.ts");
+const health_module_1 = __webpack_require__(/*! ./health/health.module */ "./apps/api-gateway/src/health/health.module.ts");
 let ApiGatewayModule = class ApiGatewayModule {
 };
 exports.ApiGatewayModule = ApiGatewayModule;
 exports.ApiGatewayModule = ApiGatewayModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.AppConfigModule],
+        imports: [config_1.AppConfigModule, health_module_1.HealthModule],
         controllers: [api_gateway_controller_1.ApiGatewayController],
         providers: [api_gateway_service_1.ApiGatewayService],
     })
@@ -105,6 +106,73 @@ exports.ApiGatewayService = ApiGatewayService;
 exports.ApiGatewayService = ApiGatewayService = __decorate([
     (0, common_1.Injectable)()
 ], ApiGatewayService);
+
+
+/***/ }),
+
+/***/ "./apps/api-gateway/src/health/health.controller.ts":
+/*!**********************************************************!*\
+  !*** ./apps/api-gateway/src/health/health.controller.ts ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HealthController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+let HealthController = class HealthController {
+    checkHealth() {
+        return { status: 'ok' };
+    }
+};
+exports.HealthController = HealthController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HealthController.prototype, "checkHealth", null);
+exports.HealthController = HealthController = __decorate([
+    (0, common_1.Controller)('health')
+], HealthController);
+
+
+/***/ }),
+
+/***/ "./apps/api-gateway/src/health/health.module.ts":
+/*!******************************************************!*\
+  !*** ./apps/api-gateway/src/health/health.module.ts ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HealthModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const health_controller_1 = __webpack_require__(/*! ./health.controller */ "./apps/api-gateway/src/health/health.controller.ts");
+let HealthModule = class HealthModule {
+};
+exports.HealthModule = HealthModule;
+exports.HealthModule = HealthModule = __decorate([
+    (0, common_1.Module)({
+        controllers: [health_controller_1.HealthController]
+    })
+], HealthModule);
 
 
 /***/ }),
