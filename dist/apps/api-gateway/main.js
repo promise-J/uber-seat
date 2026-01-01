@@ -65,12 +65,13 @@ exports.ApiGatewayModule = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const api_gateway_controller_1 = __webpack_require__(/*! ./api-gateway.controller */ "./apps/api-gateway/src/api-gateway.controller.ts");
 const api_gateway_service_1 = __webpack_require__(/*! ./api-gateway.service */ "./apps/api-gateway/src/api-gateway.service.ts");
+const config_1 = __webpack_require__(/*! @app/config */ "./libs/config/src/index.ts");
 let ApiGatewayModule = class ApiGatewayModule {
 };
 exports.ApiGatewayModule = ApiGatewayModule;
 exports.ApiGatewayModule = ApiGatewayModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [config_1.AppConfigModule],
         controllers: [api_gateway_controller_1.ApiGatewayController],
         providers: [api_gateway_service_1.ApiGatewayService],
     })
@@ -108,6 +109,172 @@ exports.ApiGatewayService = ApiGatewayService = __decorate([
 
 /***/ }),
 
+/***/ "./libs/common/filter/http-exception.filter.ts":
+/*!*****************************************************!*\
+  !*** ./libs/common/filter/http-exception.filter.ts ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GlobalExceptionFilter = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+let GlobalExceptionFilter = class GlobalExceptionFilter {
+    catch(exception, host) {
+        const ctx = host.switchToHttp();
+        const response = ctx.getResponse();
+        const request = ctx.getRequest();
+        const status = exception instanceof common_1.HttpException ? exception.getStatus() : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
+        const message = exception instanceof common_1.HttpException ? exception.getResponse() : 'Internal server error';
+        response.status(status).json({
+            success: false,
+            timestamp: new Date().toISOString(),
+            path: request.url,
+            error: message
+        });
+    }
+};
+exports.GlobalExceptionFilter = GlobalExceptionFilter;
+exports.GlobalExceptionFilter = GlobalExceptionFilter = __decorate([
+    (0, common_1.Catch)()
+], GlobalExceptionFilter);
+
+
+/***/ }),
+
+/***/ "./libs/common/interceptors/logging.interceptor.ts":
+/*!*********************************************************!*\
+  !*** ./libs/common/interceptors/logging.interceptor.ts ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.LoggingInterceptor = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+let LoggingInterceptor = class LoggingInterceptor {
+    intercept(context, next) {
+        const request = context.switchToHttp().getRequest();
+        const { method, url } = request;
+        const now = Date.now();
+        return next.handle().pipe((0, rxjs_1.tap)(() => {
+            const duration = Date.now() - now;
+            console.log(`[${method}] ${url} - ${duration}ms`);
+        }));
+    }
+};
+exports.LoggingInterceptor = LoggingInterceptor;
+exports.LoggingInterceptor = LoggingInterceptor = __decorate([
+    (0, common_1.Injectable)()
+], LoggingInterceptor);
+
+
+/***/ }),
+
+/***/ "./libs/config/src/config.module.ts":
+/*!******************************************!*\
+  !*** ./libs/config/src/config.module.ts ***!
+  \******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AppConfigModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const config_service_1 = __webpack_require__(/*! ./config.service */ "./libs/config/src/config.service.ts");
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
+let AppConfigModule = class AppConfigModule {
+};
+exports.AppConfigModule = AppConfigModule;
+exports.AppConfigModule = AppConfigModule = __decorate([
+    (0, common_1.Module)({
+        providers: [config_service_1.ConfigService],
+        exports: [config_service_1.ConfigService],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath: ['.env'],
+            })
+        ]
+    })
+], AppConfigModule);
+
+
+/***/ }),
+
+/***/ "./libs/config/src/config.service.ts":
+/*!*******************************************!*\
+  !*** ./libs/config/src/config.service.ts ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConfigService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+let ConfigService = class ConfigService {
+};
+exports.ConfigService = ConfigService;
+exports.ConfigService = ConfigService = __decorate([
+    (0, common_1.Injectable)()
+], ConfigService);
+
+
+/***/ }),
+
+/***/ "./libs/config/src/index.ts":
+/*!**********************************!*\
+  !*** ./libs/config/src/index.ts ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(/*! ./config.module */ "./libs/config/src/config.module.ts"), exports);
+__exportStar(__webpack_require__(/*! ./config.service */ "./libs/config/src/config.service.ts"), exports);
+
+
+/***/ }),
+
 /***/ "@nestjs/common":
 /*!*********************************!*\
   !*** external "@nestjs/common" ***!
@@ -118,6 +285,16 @@ module.exports = require("@nestjs/common");
 
 /***/ }),
 
+/***/ "@nestjs/config":
+/*!*********************************!*\
+  !*** external "@nestjs/config" ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = require("@nestjs/config");
+
+/***/ }),
+
 /***/ "@nestjs/core":
 /*!*******************************!*\
   !*** external "@nestjs/core" ***!
@@ -125,6 +302,16 @@ module.exports = require("@nestjs/common");
 /***/ ((module) => {
 
 module.exports = require("@nestjs/core");
+
+/***/ }),
+
+/***/ "rxjs":
+/*!***********************!*\
+  !*** external "rxjs" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("rxjs");
 
 /***/ })
 
@@ -166,8 +353,12 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
 const api_gateway_module_1 = __webpack_require__(/*! ./api-gateway.module */ "./apps/api-gateway/src/api-gateway.module.ts");
+const http_exception_filter_1 = __webpack_require__(/*! libs/common/filter/http-exception.filter */ "./libs/common/filter/http-exception.filter.ts");
+const logging_interceptor_1 = __webpack_require__(/*! libs/common/interceptors/logging.interceptor */ "./libs/common/interceptors/logging.interceptor.ts");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(api_gateway_module_1.ApiGatewayModule);
+    app.useGlobalFilters(new http_exception_filter_1.GlobalExceptionFilter());
+    app.useGlobalInterceptors(new logging_interceptor_1.LoggingInterceptor());
     await app.listen(process.env.port ?? 3000);
 }
 bootstrap();
