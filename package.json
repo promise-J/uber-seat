@@ -10,8 +10,8 @@
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
-    "start:auth": "nest start auth-service --watch",
-    "start:api-gateway": "nest start api-gateway --watch",
+    "dev:auth": "nest start auth-service --watch",
+    "dev:api-gateway": "nest start api-gateway --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/uber-app/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -84,7 +84,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@app/config(|/.*)$": "<rootDir>/libs/config/src/$1"
+      "^@app/config(|/.*)$": "<rootDir>/libs/config/src/$1",
+      "^@app/redis(|/.*)$": "<rootDir>/libs/redis/src/$1"
     }
   }
 }

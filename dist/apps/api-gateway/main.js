@@ -99,7 +99,7 @@ exports.ApiGatewayService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 let ApiGatewayService = class ApiGatewayService {
     getHello() {
-        return 'Hello World!';
+        return 'Hello World! from api gateway';
     }
 };
 exports.ApiGatewayService = ApiGatewayService;

@@ -1,19 +1,22 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
-import { Document } from "mongoose"
+import {
+  Injectable,
+} from '@nestjs/common';
+import { User } from './user.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
-@Schema({timestamps: true})
-export class User extends Document {
-    @Prop({required: true, unique: true})
-    email: string;
+@Injectable()
+export class UserService {
+  constructor(
+    @InjectModel(User.name)
+    private userModel: Model<User>,
+  ) {}
 
-    @Prop({required: true})
-    password: string;
+  findByEmail(email: string) {
+    return this.userModel.findOne({ email });
+  }
 
-    @Prop({default: 'rider'})
-    role: string;
-
-    @Prop({default: true})
-    isActive: boolean;
+  create(user: Partial<User>) {
+    return this.userModel.create(user);
+  }
 }
-
-export const UserSchema = SchemaFactory.createForClass(User)
