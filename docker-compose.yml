@@ -5,7 +5,7 @@ services:
     image: mongo:6
     container_name: uber_mongo
     ports:
-      - "27017:27017"
+      - "27018:27018"
     volumes:
       - mongo_data:/data/db
 

@@ -2,11 +2,11 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./apps/auth-service/src/auth/auth.controller.ts":
+/***/ "./apps/auth-service/src/auth/auth.controller.ts"
 /*!*******************************************************!*\
   !*** ./apps/auth-service/src/auth/auth.controller.ts ***!
   \*******************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -71,13 +71,13 @@ exports.AppController = AppController = __decorate([
 ], AppController);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/auth/auth.module.ts":
+/***/ "./apps/auth-service/src/auth/auth.module.ts"
 /*!***************************************************!*\
   !*** ./apps/auth-service/src/auth/auth.module.ts ***!
   \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -118,13 +118,13 @@ exports.AppModule = AppModule = __decorate([
 ], AppModule);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/auth/auth.service.ts":
+/***/ "./apps/auth-service/src/auth/auth.service.ts"
 /*!****************************************************!*\
   !*** ./apps/auth-service/src/auth/auth.service.ts ***!
   \****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -176,7 +176,7 @@ const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const user_service_1 = __webpack_require__(/*! ../users/user.service */ "./apps/auth-service/src/users/user.service.ts");
 const jwt_1 = __webpack_require__(/*! @nestjs/jwt */ "@nestjs/jwt");
 const bcrypt = __importStar(__webpack_require__(/*! bcrypt */ "bcrypt"));
-const redis_1 = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '@app/redis'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+const redis_1 = __webpack_require__(/*! @app/redis */ "./libs/redis/src/index.ts");
 let AuthService = class AuthService {
     userService;
     jwtService;
@@ -224,13 +224,13 @@ exports.AuthService = AuthService = __decorate([
 ], AuthService);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/dto/login.dto.ts":
+/***/ "./apps/auth-service/src/dto/login.dto.ts"
 /*!************************************************!*\
   !*** ./apps/auth-service/src/dto/login.dto.ts ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -260,13 +260,13 @@ __decorate([
 ], LoginDto.prototype, "password", void 0);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/dto/register.dto.ts":
+/***/ "./apps/auth-service/src/dto/register.dto.ts"
 /*!***************************************************!*\
   !*** ./apps/auth-service/src/dto/register.dto.ts ***!
   \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -297,13 +297,13 @@ __decorate([
 ], RegisterDto.prototype, "password", void 0);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/users/user.module.ts":
+/***/ "./apps/auth-service/src/users/user.module.ts"
 /*!****************************************************!*\
   !*** ./apps/auth-service/src/users/user.module.ts ***!
   \****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -335,13 +335,13 @@ exports.UserModule = UserModule = __decorate([
 ], UserModule);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/users/user.schema.ts":
+/***/ "./apps/auth-service/src/users/user.schema.ts"
 /*!****************************************************!*\
   !*** ./apps/auth-service/src/users/user.schema.ts ***!
   \****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -386,13 +386,13 @@ exports.User = User = __decorate([
 exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/auth-service/src/users/user.service.ts":
+/***/ "./apps/auth-service/src/users/user.service.ts"
 /*!*****************************************************!*\
   !*** ./apps/auth-service/src/users/user.service.ts ***!
   \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -434,13 +434,13 @@ exports.UserService = UserService = __decorate([
 ], UserService);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/common/filter/http-exception.filter.ts":
+/***/ "./libs/common/filter/http-exception.filter.ts"
 /*!*****************************************************!*\
   !*** ./libs/common/filter/http-exception.filter.ts ***!
   \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -473,13 +473,13 @@ exports.GlobalExceptionFilter = GlobalExceptionFilter = __decorate([
 ], GlobalExceptionFilter);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/common/interceptors/logging.interceptor.ts":
+/***/ "./libs/common/interceptors/logging.interceptor.ts"
 /*!*********************************************************!*\
   !*** ./libs/common/interceptors/logging.interceptor.ts ***!
   \*********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -509,13 +509,13 @@ exports.LoggingInterceptor = LoggingInterceptor = __decorate([
 ], LoggingInterceptor);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/config/src/config.module.ts":
+/***/ "./libs/config/src/config.module.ts"
 /*!******************************************!*\
   !*** ./libs/config/src/config.module.ts ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -546,13 +546,13 @@ exports.AppConfigModule = AppConfigModule = __decorate([
 ], AppConfigModule);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/config/src/config.service.ts":
+/***/ "./libs/config/src/config.service.ts"
 /*!*******************************************!*\
   !*** ./libs/config/src/config.service.ts ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -572,13 +572,13 @@ exports.ConfigService = ConfigService = __decorate([
 ], ConfigService);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/config/src/index.ts":
+/***/ "./libs/config/src/index.ts"
 /*!**********************************!*\
   !*** ./libs/config/src/index.ts ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -600,97 +600,206 @@ __exportStar(__webpack_require__(/*! ./config.module */ "./libs/config/src/confi
 __exportStar(__webpack_require__(/*! ./config.service */ "./libs/config/src/config.service.ts"), exports);
 
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/common":
+/***/ "./libs/redis/src/index.ts"
+/*!*********************************!*\
+  !*** ./libs/redis/src/index.ts ***!
+  \*********************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(/*! ./redis.module */ "./libs/redis/src/redis.module.ts"), exports);
+__exportStar(__webpack_require__(/*! ./redis.service */ "./libs/redis/src/redis.service.ts"), exports);
+
+
+/***/ },
+
+/***/ "./libs/redis/src/redis.module.ts"
+/*!****************************************!*\
+  !*** ./libs/redis/src/redis.module.ts ***!
+  \****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RedisModule = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const redis_service_1 = __webpack_require__(/*! ./redis.service */ "./libs/redis/src/redis.service.ts");
+let RedisModule = class RedisModule {
+};
+exports.RedisModule = RedisModule;
+exports.RedisModule = RedisModule = __decorate([
+    (0, common_1.Global)(),
+    (0, common_1.Module)({
+        providers: [redis_service_1.RedisService],
+        exports: [redis_service_1.RedisService],
+    })
+], RedisModule);
+
+
+/***/ },
+
+/***/ "./libs/redis/src/redis.service.ts"
+/*!*****************************************!*\
+  !*** ./libs/redis/src/redis.service.ts ***!
+  \*****************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RedisService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const ioredis_1 = __importDefault(__webpack_require__(/*! ioredis */ "ioredis"));
+let RedisService = class RedisService {
+    client;
+    onModuleInit() {
+        this.client = new ioredis_1.default({
+            host: process.env.REDIS_HOST,
+            port: Number(process.env.REDIS_PORT)
+        });
+    }
+    getClient() {
+        return this.client;
+    }
+};
+exports.RedisService = RedisService;
+exports.RedisService = RedisService = __decorate([
+    (0, common_1.Injectable)()
+], RedisService);
+
+
+/***/ },
+
+/***/ "@nestjs/common"
 /*!*********************************!*\
   !*** external "@nestjs/common" ***!
   \*********************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/common");
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/config":
+/***/ "@nestjs/config"
 /*!*********************************!*\
   !*** external "@nestjs/config" ***!
   \*********************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/config");
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/core":
+/***/ "@nestjs/core"
 /*!*******************************!*\
   !*** external "@nestjs/core" ***!
   \*******************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/core");
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/jwt":
+/***/ "@nestjs/jwt"
 /*!******************************!*\
   !*** external "@nestjs/jwt" ***!
   \******************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/jwt");
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/mongoose":
+/***/ "@nestjs/mongoose"
 /*!***********************************!*\
   !*** external "@nestjs/mongoose" ***!
   \***********************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/mongoose");
 
-/***/ }),
+/***/ },
 
-/***/ "bcrypt":
+/***/ "bcrypt"
 /*!*************************!*\
   !*** external "bcrypt" ***!
   \*************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("bcrypt");
 
-/***/ }),
+/***/ },
 
-/***/ "class-validator":
+/***/ "class-validator"
 /*!**********************************!*\
   !*** external "class-validator" ***!
   \**********************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("class-validator");
 
-/***/ }),
+/***/ },
 
-/***/ "mongoose":
+/***/ "ioredis"
+/*!**************************!*\
+  !*** external "ioredis" ***!
+  \**************************/
+(module) {
+
+module.exports = require("ioredis");
+
+/***/ },
+
+/***/ "mongoose"
 /*!***************************!*\
   !*** external "mongoose" ***!
   \***************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("mongoose");
 
-/***/ }),
+/***/ },
 
-/***/ "rxjs":
+/***/ "rxjs"
 /*!***********************!*\
   !*** external "rxjs" ***!
   \***********************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("rxjs");
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -703,6 +812,12 @@ module.exports = require("rxjs");
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
