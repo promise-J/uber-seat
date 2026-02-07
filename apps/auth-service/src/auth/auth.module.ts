@@ -1,25 +1,35 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { AppConfigModule } from '@app/config';
-import { UserModule } from '../users/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserService } from '../users/user.service';
 import { JwtModule } from '@nestjs/jwt';
+import { RedisModule } from '@app/redis';  // Your custom Redis module
+import { AuthService } from './auth.service';
+import { UserService } from '../users/user.service';
+import { AuthController } from './auth.controller';
 import { User, UserSchema } from '../users/user.schema';
+import { UserModule } from '../users/user.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from '../strategies/jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/uber-clone'),
-    MongooseModule.forFeature([{name: User.name, schema: UserSchema}]),
+    ConfigModule.forRoot({isGlobal: true}),
+    MongooseModule.forRoot('mongodb://localhost:27018/uber-auth'),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: {expiresIn: "6h"}
+      secret: process.env.JWT_SECRET || 'supersecret',
+      signOptions: {expiresIn: '6h'}
     }),
-    AppConfigModule,
-    UserModule,
+    RedisModule.forRoot({
+      host: process.env.REDIS_HOST || 'localhost',
+      port: Number(process.env.REDIS_PORT || 6379)
+    }),
+    PassportModule,
+    UserModule
   ],
-  controllers: [AppController],
-  providers: [AuthService, UserService],
+  controllers: [AuthController],
+  providers: [AuthService, UserService, JwtStrategy],
 })
-export class AppModule {}
+export class AuthModule {}
+
+

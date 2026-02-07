@@ -5,6 +5,6 @@ export class LoginDto {
     @IsEmail()
     email: string;
 
-    @IsString()
+    @IsString({message: 'Password is required'})
     password: string;
 }

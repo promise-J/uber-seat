@@ -1,22 +1,18 @@
-import {
-  Injectable,
-} from '@nestjs/common';
-import { User } from './user.schema';
-import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User, UserDocument } from './user.schema';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectModel(User.name)
-    private userModel: Model<User>,
-  ) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  findByEmail(email: string) {
-    return this.userModel.findOne({ email });
+  async create(data: { email: string; password: string }): Promise<User> {
+    const user = new this.userModel({ ...data, role: 'user' });  // Add default role
+    return user.save();
   }
 
-  create(user: Partial<User>) {
-    return this.userModel.create(user);
+  async findByEmail(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email }).exec();
   }
 }
