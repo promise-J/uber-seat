@@ -2,11 +2,11 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./apps/api-gateway/src/api-gateway.controller.ts":
+/***/ "./apps/api-gateway/src/api-gateway.controller.ts"
 /*!********************************************************!*\
   !*** ./apps/api-gateway/src/api-gateway.controller.ts ***!
   \********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -45,13 +45,13 @@ exports.ApiGatewayController = ApiGatewayController = __decorate([
 ], ApiGatewayController);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/api-gateway/src/api-gateway.module.ts":
+/***/ "./apps/api-gateway/src/api-gateway.module.ts"
 /*!****************************************************!*\
   !*** ./apps/api-gateway/src/api-gateway.module.ts ***!
   \****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -79,13 +79,13 @@ exports.ApiGatewayModule = ApiGatewayModule = __decorate([
 ], ApiGatewayModule);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/api-gateway/src/api-gateway.service.ts":
+/***/ "./apps/api-gateway/src/api-gateway.service.ts"
 /*!*****************************************************!*\
   !*** ./apps/api-gateway/src/api-gateway.service.ts ***!
   \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -108,13 +108,13 @@ exports.ApiGatewayService = ApiGatewayService = __decorate([
 ], ApiGatewayService);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/api-gateway/src/health/health.controller.ts":
+/***/ "./apps/api-gateway/src/health/health.controller.ts"
 /*!**********************************************************!*\
   !*** ./apps/api-gateway/src/health/health.controller.ts ***!
   \**********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -146,13 +146,13 @@ exports.HealthController = HealthController = __decorate([
 ], HealthController);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./apps/api-gateway/src/health/health.module.ts":
+/***/ "./apps/api-gateway/src/health/health.module.ts"
 /*!******************************************************!*\
   !*** ./apps/api-gateway/src/health/health.module.ts ***!
   \******************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -175,13 +175,13 @@ exports.HealthModule = HealthModule = __decorate([
 ], HealthModule);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/common/filter/http-exception.filter.ts":
+/***/ "./libs/common/filter/http-exception.filter.ts"
 /*!*****************************************************!*\
   !*** ./libs/common/filter/http-exception.filter.ts ***!
   \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -191,36 +191,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GlobalExceptionFilter = void 0;
+exports.HttpExceptionFilter = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-let GlobalExceptionFilter = class GlobalExceptionFilter {
+let HttpExceptionFilter = class HttpExceptionFilter {
     catch(exception, host) {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-        const status = exception instanceof common_1.HttpException ? exception.getStatus() : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
-        const message = exception instanceof common_1.HttpException ? exception.getResponse() : 'Internal server error';
+        const status = exception instanceof common_1.HttpException
+            ? exception.getStatus()
+            : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
+        let exceptionResponse = exception instanceof common_1.HttpException
+            ? exception.getResponse()
+            : null;
+        let customMessage;
+        if (exception instanceof common_1.UnauthorizedException) {
+            const originalMessage = typeof exceptionResponse === 'string'
+                ? exceptionResponse
+                : exceptionResponse?.message || exception.message || '';
+            if (originalMessage.includes('jwt') ||
+                originalMessage.includes('token') ||
+                originalMessage.includes('JsonWebTokenError') ||
+                originalMessage.includes('TokenExpiredError') ||
+                originalMessage.includes('NotBeforeError')) {
+                customMessage = 'Invalid or expired token';
+            }
+            else {
+                customMessage = 'Unauthorized access';
+            }
+        }
+        const message = customMessage || (typeof exceptionResponse === 'string'
+            ? exceptionResponse
+            : exceptionResponse?.message || 'Internal server error');
         response.status(status).json({
             success: false,
-            timestamp: new Date().toISOString(),
-            path: request.url,
-            error: message
+            statusCode: status,
+            message: message,
         });
     }
 };
-exports.GlobalExceptionFilter = GlobalExceptionFilter;
-exports.GlobalExceptionFilter = GlobalExceptionFilter = __decorate([
+exports.HttpExceptionFilter = HttpExceptionFilter;
+exports.HttpExceptionFilter = HttpExceptionFilter = __decorate([
     (0, common_1.Catch)()
-], GlobalExceptionFilter);
+], HttpExceptionFilter);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/common/interceptors/logging.interceptor.ts":
+/***/ "./libs/common/interceptors/logging.interceptor.ts"
 /*!*********************************************************!*\
   !*** ./libs/common/interceptors/logging.interceptor.ts ***!
   \*********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -250,13 +272,13 @@ exports.LoggingInterceptor = LoggingInterceptor = __decorate([
 ], LoggingInterceptor);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/config/src/config.module.ts":
+/***/ "./libs/config/src/config.module.ts"
 /*!******************************************!*\
   !*** ./libs/config/src/config.module.ts ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -287,13 +309,13 @@ exports.AppConfigModule = AppConfigModule = __decorate([
 ], AppConfigModule);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/config/src/config.service.ts":
+/***/ "./libs/config/src/config.service.ts"
 /*!*******************************************!*\
   !*** ./libs/config/src/config.service.ts ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -313,13 +335,13 @@ exports.ConfigService = ConfigService = __decorate([
 ], ConfigService);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./libs/config/src/index.ts":
+/***/ "./libs/config/src/index.ts"
 /*!**********************************!*\
   !*** ./libs/config/src/index.ts ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -341,47 +363,47 @@ __exportStar(__webpack_require__(/*! ./config.module */ "./libs/config/src/confi
 __exportStar(__webpack_require__(/*! ./config.service */ "./libs/config/src/config.service.ts"), exports);
 
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/common":
+/***/ "@nestjs/common"
 /*!*********************************!*\
   !*** external "@nestjs/common" ***!
   \*********************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/common");
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/config":
+/***/ "@nestjs/config"
 /*!*********************************!*\
   !*** external "@nestjs/config" ***!
   \*********************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/config");
 
-/***/ }),
+/***/ },
 
-/***/ "@nestjs/core":
+/***/ "@nestjs/core"
 /*!*******************************!*\
   !*** external "@nestjs/core" ***!
   \*******************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("@nestjs/core");
 
-/***/ }),
+/***/ },
 
-/***/ "rxjs":
+/***/ "rxjs"
 /*!***********************!*\
   !*** external "rxjs" ***!
   \***********************/
-/***/ ((module) => {
+(module) {
 
 module.exports = require("rxjs");
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -394,6 +416,12 @@ module.exports = require("rxjs");
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -425,9 +453,10 @@ const http_exception_filter_1 = __webpack_require__(/*! libs/common/filter/http-
 const logging_interceptor_1 = __webpack_require__(/*! libs/common/interceptors/logging.interceptor */ "./libs/common/interceptors/logging.interceptor.ts");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(api_gateway_module_1.ApiGatewayModule);
-    app.useGlobalFilters(new http_exception_filter_1.GlobalExceptionFilter());
+    app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
     app.useGlobalInterceptors(new logging_interceptor_1.LoggingInterceptor());
-    await app.listen(process.env.port ?? 3000);
+    const port = process.env.PORT ?? 3000;
+    await app.listen(port, '0.0.0.0');
 }
 bootstrap();
 

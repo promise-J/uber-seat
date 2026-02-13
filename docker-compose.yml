@@ -5,7 +5,7 @@ services:
     image: mongo:6
     container_name: uber_mongo
     ports:
-      - "27018:27017"
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
 
@@ -14,6 +14,34 @@ services:
     container_name: uber_redis
     ports:
       - "6379:6379"
+  
+  auth-service:
+    build:
+      context: .
+      dockerfile: ./apps/auth-service/Dockerfile
+    container_name: uber_auth_service
+    ports:
+      - "3001:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - mongo
+      - redis
+  api-gateway:
+    build: 
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+    container_name: uber_api_gateway
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    depends_on:
+      - auth-service
 
 volumes:
   mongo_data:

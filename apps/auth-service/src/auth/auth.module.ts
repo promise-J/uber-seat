@@ -10,11 +10,12 @@ import { UserModule } from '../users/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from '../strategies/jwt.strategy';
 import { ConfigModule } from '@nestjs/config';
+import { RootController } from './root.controller';
 
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal: true}),
-    MongooseModule.forRoot('mongodb://localhost:27018/uber-auth'),
+    MongooseModule.forRoot(process.env.MONGO_URI || ""),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'supersecret',
@@ -27,7 +28,7 @@ import { ConfigModule } from '@nestjs/config';
     PassportModule,
     UserModule
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, RootController],
   providers: [AuthService, UserService, JwtStrategy],
 })
 export class AuthModule {}
