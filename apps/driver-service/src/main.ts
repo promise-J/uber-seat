@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { DriverServiceModule } from './driver-service.module';
+import { DriverServiceModule } from './driver.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(DriverServiceModule);

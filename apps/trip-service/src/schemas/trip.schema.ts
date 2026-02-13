@@ -1,6 +1,7 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export type TripDocument = Trip & Document;
+export type TripDocument = HydratedDocument<Trip>;
 
 export type TripStatus =
   | 'requested'
@@ -29,3 +30,6 @@ export class Trip extends Document {
   @Prop()
   fare: number;
 }
+
+
+export const TripSchema = SchemaFactory.createForClass(Trip);

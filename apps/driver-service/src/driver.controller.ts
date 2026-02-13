@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "libs/guards/jwt-auth.guard";
 import { RegisterDriverDto } from "./dto/register-driver.dto";
-import { DriverService } from "./driver-service.service";
+import { DriverService } from "./driver-service";
 
 @Controller('drivers')
 @UseGuards(JwtAuthGuard)

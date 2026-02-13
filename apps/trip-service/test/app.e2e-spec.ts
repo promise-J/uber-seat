@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { TripServiceModule } from './../src/trip-service.module';
+import { TripServiceModule } from '../src/trip.module';
 
 describe('TripServiceController (e2e)', () => {
   let app: INestApplication;

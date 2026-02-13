@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { DriverServiceModule } from './../src/driver-service.module';
+import { DriverServiceModule } from '../src/driver.module';
 
 describe('DriverServiceController (e2e)', () => {
   let app: INestApplication;
