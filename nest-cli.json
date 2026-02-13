@@ -37,6 +37,15 @@
         "tsConfigPath": "libs/config/tsconfig.lib.json"
       }
     },
+    "driver-service": {
+      "type": "application",
+      "root": "apps/driver-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/driver-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/driver-service/tsconfig.app.json"
+      }
+    },
     "redis": {
       "type": "library",
       "root": "libs/redis",
@@ -44,6 +53,24 @@
       "sourceRoot": "libs/redis/src",
       "compilerOptions": {
         "tsConfigPath": "libs/redis/tsconfig.lib.json"
+      }
+    },
+    "trip-service": {
+      "type": "application",
+      "root": "apps/trip-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/trip-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/trip-service/tsconfig.app.json"
+      }
+    },
+    "rider-service": {
+      "type": "application",
+      "root": "apps/rider-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/rider-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rider-service/tsconfig.app.json"
       }
     }
   }

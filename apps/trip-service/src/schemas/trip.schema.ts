@@ -1,4 +1,4 @@
-import { Prop, Schema } from "@nestjs/mongoose";
+import { Prop, Schema } from '@nestjs/mongoose';
 
 export type TripDocument = Trip & Document;
 
@@ -8,7 +8,6 @@ export type TripStatus =
   | 'started'
   | 'completed'
   | 'cancelled';
-
 
 @Schema({ timestamps: true })
 export class Trip extends Document {
