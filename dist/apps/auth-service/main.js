@@ -28,7 +28,7 @@ const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const auth_service_1 = __webpack_require__(/*! ./auth.service */ "./apps/auth-service/src/auth/auth.service.ts");
 const register_dto_1 = __webpack_require__(/*! ../dto/register.dto */ "./apps/auth-service/src/dto/register.dto.ts");
 const login_dto_1 = __webpack_require__(/*! ../dto/login.dto */ "./apps/auth-service/src/dto/login.dto.ts");
-const jwt_auth_guard_1 = __webpack_require__(/*! ../guards/jwt-auth.guard */ "./apps/auth-service/src/guards/jwt-auth.guard.ts");
+const jwt_auth_guard_1 = __webpack_require__(/*! ../../../../libs/guards/jwt-auth.guard */ "./libs/guards/jwt-auth.guard.ts");
 let AuthController = class AuthController {
     authService;
     constructor(authService) {
@@ -370,39 +370,6 @@ __decorate([
 
 /***/ },
 
-/***/ "./apps/auth-service/src/guards/jwt-auth.guard.ts"
-/*!********************************************************!*\
-  !*** ./apps/auth-service/src/guards/jwt-auth.guard.ts ***!
-  \********************************************************/
-(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.JwtAuthGuard = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const passport_1 = __webpack_require__(/*! @nestjs/passport */ "@nestjs/passport");
-let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
-    handleRequest(err, user, info) {
-        if (err || !user) {
-            throw new common_1.UnauthorizedException('Invalid or expired token');
-        }
-        return user;
-    }
-};
-exports.JwtAuthGuard = JwtAuthGuard;
-exports.JwtAuthGuard = JwtAuthGuard = __decorate([
-    (0, common_1.Injectable)()
-], JwtAuthGuard);
-
-
-/***/ },
-
 /***/ "./apps/auth-service/src/main.ts"
 /*!***************************************!*\
   !*** ./apps/auth-service/src/main.ts ***!
@@ -731,6 +698,39 @@ exports.LoggingInterceptor = LoggingInterceptor;
 exports.LoggingInterceptor = LoggingInterceptor = __decorate([
     (0, common_1.Injectable)()
 ], LoggingInterceptor);
+
+
+/***/ },
+
+/***/ "./libs/guards/jwt-auth.guard.ts"
+/*!***************************************!*\
+  !*** ./libs/guards/jwt-auth.guard.ts ***!
+  \***************************************/
+(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JwtAuthGuard = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const passport_1 = __webpack_require__(/*! @nestjs/passport */ "@nestjs/passport");
+let JwtAuthGuard = class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
+    handleRequest(err, user, info) {
+        if (err || !user) {
+            throw new common_1.UnauthorizedException('Invalid or expired token');
+        }
+        return user;
+    }
+};
+exports.JwtAuthGuard = JwtAuthGuard;
+exports.JwtAuthGuard = JwtAuthGuard = __decorate([
+    (0, common_1.Injectable)()
+], JwtAuthGuard);
 
 
 /***/ },

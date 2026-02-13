@@ -30,6 +30,18 @@ services:
     depends_on:
       - mongo
       - redis
+
+  rider-service:
+    build:
+      context: .
+      dockerfile: ./apps/rider-service/Dockerfile
+    container_name: uber_rider_service
+    ports:
+      - "3002:3000"
+    env_file:
+      - fileName: ./apps/rider-service/.env
+    volumes:
+      - ./:/app
   api-gateway:
     build: 
       context: .
