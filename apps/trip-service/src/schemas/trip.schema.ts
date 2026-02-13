@@ -29,6 +29,9 @@ export class Trip extends Document {
 
   @Prop()
   fare: number;
+
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 
